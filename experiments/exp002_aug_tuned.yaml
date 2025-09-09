@@ -1,0 +1,10 @@
+backbone: efficientnet_b0
+epochs: 30
+batch_size: 128
+lr: 0.00025
+use_focal: true
+alpha: 0.75
+gamma: 2.0
+labels: [angry, happy, sad, neutral]
+train_dir: data/processed/train
+val_dir: data/processed/val

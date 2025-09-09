@@ -1,0 +1,6 @@
+{
+	"label_counts": {},
+	"datasets": ["FER-2013", "RAF-DB", "AffectNet"],
+	"image_size_stats": {"mean": null, "std": null},
+	"notes": "Populate after data processing"
+}

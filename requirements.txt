@@ -1,0 +1,29 @@
+# Core ML and vision
+torch
+torchvision
+torchaudio
+
+# Models and utils
+timm
+albumentations
+opencv-python-headless
+pillow
+pandas
+scikit-learn
+numpy
+matplotlib
+
+# Explainability
+pytorch-grad-cam
+
+# API and serving
+fastapi
+uvicorn[standard]
+python-multipart
+pydantic>=2
+
+# UI
+streamlit
+
+# Optional extras
+PyYAML

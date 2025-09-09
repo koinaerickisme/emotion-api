@@ -1,0 +1,23 @@
+services:
+- type: web
+  name: emotion-api
+  env: python
+  plan: free
+  buildCommand: pip install -r requirements.txt
+  startCommand: uvicorn src.infer_service.app:app --host 0.0.0.0 --port $PORT
+  envVars:
+  - key: FACE_DETECT
+    value: "1"
+  - key: EMOTION_CONF_THRESH
+    value: "0.45"
+  - key: REQUEST_LOG_PATH
+    value: logs/requests.csv
+  - key: CORS_ORIGINS
+    value: "*"
+  - key: WEIGHTS_PATH
+    value: artifacts/best.pt
+  - key: DEVICE
+    value: cpu
+  # Optionally set WEIGHTS_URL to auto-download weights on startup
+  - key: WEIGHTS_URL
+    sync: false

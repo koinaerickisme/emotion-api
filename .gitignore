@@ -1,0 +1,32 @@
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.venv/
+venv/
+.env
+.env.*
+
+# Data (do not commit raw images)
+data/raw/
+data/interim/
+# Allow processed split manifests but not images
+# If you keep CSV manifests, commit them; ignore image blobs
+*.jpg
+*.jpeg
+*.png
+*.bmp
+*.gif
+
+# Artifacts and logs
+artifacts/
+logs/
+reports/*.png
+
+# Streamlit
+.streamlit/
+
+# OS
+.DS_Store
+Thumbs.db
