@@ -14,7 +14,9 @@ numpy
 matplotlib
 
 # Explainability
-pytorch-grad-cam
+# PyPI wheels for pytorch-grad-cam are occasionally unavailable for some Python versions.
+# Install directly from GitHub to ensure compatibility in Docker.
+git+https://github.com/jacobgil/pytorch-grad-cam.git
 
 # API and serving
 fastapi
