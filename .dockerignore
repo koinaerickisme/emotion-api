@@ -1,0 +1,27 @@
+# VCS
+.git
+.gitignore
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+*.log
+.venv/
+.env
+.env.*
+
+# IDE
+.vscode/
+.idea/
+
+# Data & artifacts (mount or fetch at runtime)
+data/
+logs/
+reports/
+artifacts/
+
+# Archives
+data.zip
+
