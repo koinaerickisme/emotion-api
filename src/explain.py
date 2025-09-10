@@ -21,8 +21,8 @@ def gradcam_overlay_bytes(model: torch.nn.Module, input_tensor: torch.Tensor, ta
 	target_layer = get_last_conv_layer(model)
 	if target_layer is None:
 		raise RuntimeError("No convolutional layer found for Grad-CAM")
-	use_cuda = input_tensor.is_cuda
-	cam = GradCAM(model=model, target_layers=[target_layer], use_cuda=use_cuda)
+	# use_cuda argument removed for compatibility with latest pytorch-grad-cam
+	cam = GradCAM(model=model, target_layers=[target_layer])
 	grayscale_cam = cam(input_tensor=input_tensor, targets=None)
 	grayscale_cam = grayscale_cam[0, :]
 	img = input_tensor[0].detach().cpu().permute(1, 2, 0).numpy()
