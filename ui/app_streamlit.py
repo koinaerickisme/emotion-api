@@ -9,13 +9,13 @@ import numpy as np
 import pandas as pd
 
 st.set_page_config(page_title="Emotion Demo", layout="centered")
-st.title("Facial Emotion Recognition Demo")
+st.title("Facial Emotion Recognition")
 
 with st.expander("Privacy & Consent", expanded=True):
 	st.write("This demo performs on-device or API inference on your uploaded image to predict an emotion class. Images are not stored by default. Do not upload sensitive images. By proceeding, you consent to this processing.")
 	consent = st.checkbox("I consent to process the uploaded image for this demo.")
 
-API_URL_DEFAULT = os.environ.get("EMOTION_API_URL", "http://localhost:8000")
+API_URL_DEFAULT = os.environ.get("EMOTION_API_URL", "https://emotion-api.fly.dev")
 api_url = st.text_input("API URL", value=API_URL_DEFAULT)
 # Track API URL changes to invalidate caches
 if st.session_state.get("api_url") != api_url:
