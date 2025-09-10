@@ -29,3 +29,6 @@ streamlit
 
 # Optional extras
 PyYAML
+
+# Hugging Face Hub for model download
+huggingface_hub

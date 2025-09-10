@@ -12,10 +12,18 @@ import json
 import urllib.request
 from collections import deque
 
+
 from .schemas import PredictResponse, HealthResponse, ImagePayload, ExplainResponse, ImageBatchPayload, PredictBatchResponse
 from .predictor import Predictor
 from ..explain import gradcam_overlay_bytes
 from ..config import load_labels
+
+# --- Hugging Face Hub model download ---
+import sys
+try:
+	from huggingface_hub import hf_hub_download
+except ImportError:
+	hf_hub_download = None
 
 API_VERSION = "1.0.0"
 app = FastAPI(title="Emotion API", version=API_VERSION)
@@ -66,10 +74,27 @@ async def startup_event():
 	_init_logging()
 	weights_path = os.environ.get("WEIGHTS_PATH", "artifacts/best.pt")
 	device = os.environ.get("DEVICE", "cpu")
+
+	# Download model from Hugging Face Hub if missing
 	if not os.path.exists(weights_path):
+		repo_id = os.environ.get("HF_REPO_ID", "your-username/emotion-best-pt")  # Set your repo here or via env
+		filename = os.environ.get("HF_FILENAME", "best.pt")
+		if hf_hub_download is not None:
+			try:
+				os.makedirs(os.path.dirname(weights_path), exist_ok=True)
+				hf_hub_download(
+					repo_id=repo_id,
+					filename=filename,
+					local_dir=os.path.dirname(weights_path),
+					local_dir_use_symlinks=False
+				)
+			except Exception as e:
+				print(f"[Startup] Hugging Face download failed: {e}", file=sys.stderr)
+		else:
+			print("[Startup] huggingface_hub not installed, cannot download model.", file=sys.stderr)
+		# fallback to WEIGHTS_URL if provided
 		url = os.environ.get("WEIGHTS_URL", "")
-		if url:
-			os.makedirs(os.path.dirname(weights_path), exist_ok=True)
+		if url and not os.path.exists(weights_path):
 			try:
 				urllib.request.urlretrieve(url, weights_path)
 			except Exception:
